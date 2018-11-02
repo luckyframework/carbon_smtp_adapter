@@ -11,7 +11,7 @@ class Carbon::SmtpAdapter < Carbon::Adapter
   def deliver_now(email : Carbon::Email)
     auth = get_auth_tuple
 
-    ::EMail.send(settings.host, settings.port) do
+    ::EMail.send(settings.host, settings.port, auth: auth) do
       subject email.subject
       from(email.from.address, email.from.name)
       email.to.each do |to_address|
