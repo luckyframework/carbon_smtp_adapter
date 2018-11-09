@@ -22,6 +22,7 @@ class TestEmail < BaseEmail
   to "fred@example.org"
   subject "Test Subject"
   templates text, html
+  header "X-Crystal-Version", "0.27"
 end
 
 describe CarbonSmtpAdapter do
@@ -37,5 +38,6 @@ describe CarbonSmtpAdapter do
     received_email.should match(/Subject: Test Subject/)
     received_email.should match(/Content-Type: text\/plain/)
     received_email.should match(/Content-Type: text\/html/)
+    received_email.should match(/X-Crystal-Version: 0\.27/)
   end
 end

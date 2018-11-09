@@ -13,16 +13,25 @@ class Carbon::SmtpAdapter < Carbon::Adapter
 
     ::EMail.send(settings.host, settings.port, auth: auth) do
       subject email.subject
+
       from(email.from.address, email.from.name)
+
       email.to.each do |to_address|
         to(to_address.address, to_address.name)
       end
+
       email.cc.each do |cc_address|
         cc(cc_address.address, cc_address.name)
       end
+
       email.bcc.each do |bcc_address|
         bcc(bcc_address.address, bcc_address.name)
       end
+
+      email.headers.each do |key, value|
+        custom_header(key, value)
+      end
+
       message email.text_body
       message_html email.html_body
     end
