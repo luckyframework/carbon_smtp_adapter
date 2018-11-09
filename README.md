@@ -2,9 +2,6 @@
 
 A simple SMTP-Adapter for [carbon](https://github.com/luckyframework/carbon).
 
-**Caveat**: This adapter uses [crystal-email](https://github.com/arcage/crystal-email) which does not currently allow to set arbitrary email headers. So this feature of
-carbon will not work.
-
 ## Versioning
 
 The current plan is to track carbon's major and minor numbers, so that
