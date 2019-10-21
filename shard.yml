@@ -1,20 +1,20 @@
 name: carbon_smtp_adapter
-version: 0.1.0
+version: 0.1.1
 
 authors:
   - David Roetzel <david@roetzel.de>
 
-crystal: 0.26.1
+crystal: 0.31.1
 
 license: MIT
 
 dependencies:
   carbon:
     github: luckyframework/carbon
-    version: "~> 0.1.0"
+    version: "~> 0.1.1"
   email:
     github: arcage/crystal-email
-    version: "~> 0.3.2"
+    version: "~> 0.4.3"
 development_dependencies:
   devmail:
     github: tijn/devmail
