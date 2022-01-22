@@ -11,7 +11,8 @@ class Carbon::SmtpAdapter < Carbon::Adapter
   def deliver_now(email : Carbon::Email)
     auth = get_auth_tuple
 
-    ::EMail.send(settings.host, settings.port, auth: auth) do
+    use_tls = settings.use_tls ? ::EMail::Client::TLSMode::STARTTLS : ::EMail::Client::TLSMode::NONE
+    ::EMail.send(settings.host, settings.port, auth: auth, use_tls: use_tls) do
       subject email.subject
 
       from(email.from.address, email.from.name)
@@ -29,7 +30,11 @@ class Carbon::SmtpAdapter < Carbon::Adapter
       end
 
       email.headers.each do |key, value|
-        custom_header(key, value)
+        if key == "Reply-To"
+          reply_to(value)
+        else
+          custom_header(key, value)
+        end
       end
 
       message email.text_body
