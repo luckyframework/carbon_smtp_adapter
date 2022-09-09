@@ -30,8 +30,15 @@ class Carbon::SmtpAdapter < Carbon::Adapter
       end
 
       email.headers.each do |key, value|
-        if key == "Reply-To"
+        case key.downcase
+        when "reply-to"
           reply_to(value)
+        when "message-id"
+          message_id(value)
+        when "return-path"
+          return_path(value)
+        when "sender"
+          sender(value)
         else
           custom_header(key, value)
         end
