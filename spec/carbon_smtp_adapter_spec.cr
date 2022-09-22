@@ -24,12 +24,15 @@ class TestEmail < BaseEmail
   subject "Test Subject"
   templates text, html
   header "X-Crystal-Version", "0.27"
+  header "Reply-To", "support@myapp.com"
+  header "Message-ID", "<abc123@myapp.com>"
+  header "Return-Path", "support@myapp.com"
+  header "Sender", "support@myapp.com"
 end
 
 describe CarbonSmtpAdapter do
   it "works" do
     email = TestEmail.new
-    p email.headers
     Carbon::SmtpAdapter.new.deliver_now(email)
 
     email_store.count.should eq(1)
