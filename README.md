@@ -5,7 +5,7 @@ A simple SMTP-Adapter for [carbon](https://github.com/luckyframework/carbon).
 ## Versioning
 
 The current plan is to track carbon's major and minor numbers, so that
-carbon\_smtp\_adapter `0.1.x` is compatible with carbon `0.1.x` and so on.
+carbon\_smtp\_adapter `0.1.x` is compatible with carbon `0.3.x` and so on.
 
 ## Installation
 
@@ -45,7 +45,7 @@ end
 
 ## Contributing
 
-1. Fork it (<https://github.com/oneiros/carbon_smtp_adapter/fork>)
+1. Fork it ([https://github.com/oneiros/carbon_smtp_adapter/fork](https://github.com/oneiros/carbon_smtp_adapter/fork))
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
