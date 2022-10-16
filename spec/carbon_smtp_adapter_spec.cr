@@ -9,6 +9,7 @@ smtp_server.run
 Carbon::SmtpAdapter.configure do |settings|
   settings.port = SMTP_PORT
   settings.use_tls = false
+  settings.helo_domain = "localhost"
 end
 
 abstract class BaseEmail < Carbon::Email

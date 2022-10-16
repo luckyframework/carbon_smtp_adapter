@@ -2,7 +2,7 @@ class Carbon::SmtpAdapter < Carbon::Adapter
   Habitat.create do
     setting host : String = "localhost"
     setting port : Int32 = 25
-    setting helo_domain : String? = nil
+    setting helo_domain : String
     setting use_tls : Bool = true
     setting username : String? = nil
     setting password : String? = nil
@@ -12,7 +12,7 @@ class Carbon::SmtpAdapter < Carbon::Adapter
     auth = get_auth_tuple
 
     use_tls = settings.use_tls ? ::EMail::Client::TLSMode::STARTTLS : ::EMail::Client::TLSMode::NONE
-    ::EMail.send(settings.host, settings.port, auth: auth, use_tls: use_tls) do
+    ::EMail.send(settings.host, settings.port, auth: auth, use_tls: use_tls, helo_domain: get_helo_domain) do
       subject email.subject
 
       from(email.from.address, email.from.name)
@@ -63,5 +63,13 @@ class Carbon::SmtpAdapter < Carbon::Adapter
     if username && password
       {username, password}
     end
+  end
+
+  private def get_helo_domain : String
+    if settings.helo_domain.nil?
+      raise "'helo_domain' setting is not provided"
+    end
+
+    return settings.helo_domain
   end
 end
