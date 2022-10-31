@@ -5,5 +5,5 @@ require "email"
 require "./carbon/adapters/smtp_adapter"
 
 module CarbonSmtpAdapter
-  VERSION = "0.1.0"
+  VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 end
