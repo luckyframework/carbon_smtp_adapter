@@ -14,7 +14,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   carbon_smtp_adapter:
-    github: your-github-user/carbon_smtp_adapter
+    github: luckyframework/carbon_smtp_adapter
 ```
 
 ## Usage
@@ -45,7 +45,7 @@ end
 
 ## Contributing
 
-1. Fork it (<https://github.com/oneiros/carbon_smtp_adapter/fork>)
+1. Fork it (<https://github.com/luckyframework/carbon_smtp_adapter/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -53,7 +53,7 @@ end
 
 ## Contributors
 
-- [oneiros](https://github.com/oneiros) David Roetzel - creator, maintainer
+- [oneiros](https://github.com/oneiros) David Roetzel - creator
 
 With many thanks to:
 
