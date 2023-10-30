@@ -44,8 +44,13 @@ class Carbon::SmtpAdapter < Carbon::Adapter
         end
       end
 
-      message email.text_body
-      message_html email.html_body
+      if text = email.text_body.presence
+        message(text)
+      end
+
+      if html = email.html_body.presence
+        message_html(html)
+      end
     end
   end
 

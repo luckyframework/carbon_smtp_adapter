@@ -30,6 +30,13 @@ class TestEmail < BaseEmail
   header "Sender", "support@myapp.com"
 end
 
+class NoHtmlEmail < BaseEmail
+  from Carbon::Address.new("My App Name", "support@myapp.com")
+  to "fred@example.org"
+  subject "NoHtml Subject"
+  templates text
+end
+
 describe CarbonSmtpAdapter do
   it "works" do
     email = TestEmail.new
@@ -43,5 +50,12 @@ describe CarbonSmtpAdapter do
     received_email.should match(/Content-Type: text\/plain/)
     received_email.should match(/Content-Type: text\/html/)
     received_email.should match(/X-Crystal-Version: 0\.27/)
+  end
+
+  it "sends with just text template" do
+    email = NoHtmlEmail.new
+    delivered = Carbon::SmtpAdapter.new.deliver_now(email)
+
+    delivered.should_not eq(nil)
   end
 end
