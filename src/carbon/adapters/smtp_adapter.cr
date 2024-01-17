@@ -11,8 +11,9 @@ class Carbon::SmtpAdapter < Carbon::Adapter
   def deliver_now(email : Carbon::Email)
     auth = get_auth_tuple
 
+    helo_domain = settings.helo_domain || settings.host
     use_tls = settings.use_tls ? ::EMail::Client::TLSMode::STARTTLS : ::EMail::Client::TLSMode::NONE
-    ::EMail.send(settings.host, settings.port, auth: auth, use_tls: use_tls) do
+    ::EMail.send(settings.host, settings.port, helo_domain: helo_domain, auth: auth, use_tls: use_tls) do
       subject email.subject
 
       from(email.from.address, email.from.name)
