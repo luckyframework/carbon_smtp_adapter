@@ -52,6 +52,19 @@ class Carbon::SmtpAdapter < Carbon::Adapter
       if html = email.html_body.presence
         message_html(html)
       end
+
+      email.attachments.each do |attachment|
+        case attachment
+        in AttachFile
+          attach(file_path: attachment[:file_path], file_name: attachment[:file_name], mime_type: attachment[:mime_type])
+        in AttachIO
+          attach(io: attachment[:io], file_name: attachment[:file_name], mime_type: attachment[:mime_type])
+        in ResourceFile
+          message_resource(file_path: attachment[:file_path], cid: attachment[:cid], file_name: attachment[:file_name], mime_type: attachment[:mime_type])
+        in ResourceIO
+          message_resource(io: attachment[:io], cid: attachment[:cid], file_name: attachment[:file_name], mime_type: attachment[:mime_type])
+        end
+      end
     end
   end
 
