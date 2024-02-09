@@ -28,6 +28,25 @@ class TestEmail < BaseEmail
   header "Message-ID", "<abc123@myapp.com>"
   header "Return-Path", "support@myapp.com"
   header "Sender", "support@myapp.com"
+  attachment hello
+  attachment bye
+
+  def hello
+    {
+      io:        IO::Memory.new("Hello"),
+      file_name: "hello.txt",
+      mime_type: "text/plain",
+    }
+  end
+
+  def bye
+    {
+      io:        IO::Memory.new("Bye"),
+      cid:       "unique_bar@myapp.com",
+      file_name: "bye.txt",
+      mime_type: "text/plain",
+    }
+  end
 end
 
 class NoHtmlEmail < BaseEmail
@@ -50,6 +69,10 @@ describe CarbonSmtpAdapter do
     received_email.should match(/Content-Type: text\/plain/)
     received_email.should match(/Content-Type: text\/html/)
     received_email.should match(/X-Crystal-Version: 0\.27/)
+    received_email.should match(/hello\.txt/)
+    received_email.should match(/SGVsbG8=/)
+    received_email.should match(/bye\.txt/)
+    received_email.should match(/Qnll/)
   end
 
   it "sends with just text template" do
